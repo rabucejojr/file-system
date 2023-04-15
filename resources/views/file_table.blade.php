@@ -4,6 +4,13 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">File Summary</h6>
+                <div>
+                    <form class="d-none d-md-flex ms-4" action="" method="POST">
+                        @csrf
+                        <input class="form-control bg-dark border-0" type="search" name="Search" placeholder="Search File">
+                        <button class="btn btn-primary border-0 mx-2">Search</button>
+                    </form>
+                </div>
                 <div class="table-responsive">
                     <table class="table text-center">
                         <thead>
@@ -18,7 +25,7 @@
                         <tbody>
                             {{-- loop to display db content --}}
                             @foreach ($files as $file)
-                                <tr >
+                                <tr>
                                     <td>{{ $file->FileId }}</td>
                                     <td>{{ $file->Filename }}</td>
                                     <td>{{ $file->FileFolder }}</td>
