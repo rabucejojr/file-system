@@ -19,7 +19,7 @@
                     <form method="POST" action="{{ route('store') }}">
                         @csrf
                         {{-- PROGRAM TYPE --}}
-                        <select class="form-select mb-3" name="FilePath" aria-label="Default select example" name="FileFolder">
+                        <select class="form-select mb-3" aria-label="Default select example" name="FileFolder">
                             aria-placeholder="Folder Location">
                             <option value="SETUP">SETUP</option>
                             <option value="GIA">GIA</option>

@@ -15,13 +15,13 @@ class FileController extends Controller
   }
   public function store(Request $r)
   {
-    global $file;
+    // global $file;
     //get upload_file from form
     $file = $r->Filename;
     //upload file to laravel storage
     Storage::disk('local')->put($file, 'Contents');
-    $path = Storage::url($file);
-    $folder = $r->FilePath;
+    $path = $r->FilePath;
+    $folder = $r->FileFolder;
     $fileInfo = [
       'Filename' => $file,
       'FileFolder' => $folder,
