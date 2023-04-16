@@ -55,4 +55,14 @@ class FileController extends Controller
     $files = DB::select('select * from files');
     return view('file_table', ['files' => $files]);
   }
+  public function search(Request $r)
+  {
+    $search = $r->Search;
+    // echo $search;
+    // dd();
+    $file_search = DB::table('files')->where('Filename', 'LIKE', '%' . $search . '%')->get();
+    // echo $file_search;
+    // dd();
+    return view('file_table', ['files' => $file_search]);
+  }
 }
