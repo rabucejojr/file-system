@@ -9,17 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+  // upload file infos to db
   public function upload_file()
   {
     return view('upload');
   }
+  // store/save function controller
   public function store(Request $r)
   {
-    // global $file;
-    //get upload_file from form
+    // get filename. path, and folder from upload form
     $file = $r->Filename;
-    //upload file to laravel storage
-    Storage::disk('local')->put($file, 'Contents');
     $path = $r->FilePath;
     $folder = $r->FileFolder;
     $fileInfo = [
@@ -50,19 +49,18 @@ class FileController extends Controller
       }
     }
   }
-  public function table()
+  // function to return table
+   public function table()
   {
     $files = DB::select('select * from files');
     return view('file_table', ['files' => $files]);
   }
+
+  // function to search from input from db
   public function search(Request $r)
   {
     $search = $r->Search;
-    // echo $search;
-    // dd();
     $file_search = DB::table('files')->where('Filename', 'LIKE', '%' . $search . '%')->get();
-    // echo $file_search;
-    // dd();
     return view('file_table', ['files' => $file_search]);
   }
 }
