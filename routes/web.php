@@ -17,9 +17,9 @@ use App\Http\Controllers\FileController;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/', function () {
-//     return view('partials.app');
-// });
+Route::get('/app', function () {
+    return view('partials.app');
+});
 Route::get('/upload', [FileController::class, 'upload_file'])->name('upload');
 Route::get('/table', [FileController::class, 'table'])->name('table');
 Route::post('/store', [FileController::class, 'store'])->name('store');
