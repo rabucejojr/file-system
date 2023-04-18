@@ -50,13 +50,11 @@ class FileController extends Controller
     }
   }
   // function to return table
-   public function table()
+  public function table()
   {
     $files = DB::select('select * from files');
     return view('file_table', ['files' => $files]);
   }
-
-  // function to search from input from db
   public function search(Request $r)
   {
     $search = $r->Search;

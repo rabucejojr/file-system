@@ -30,10 +30,11 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 
 <body>
-   <div class="container-fluid position-relative d-flex p-0">
+    <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner"
             class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -46,7 +47,6 @@
         {{-- from sidebar.blade --}}
         @include('partials.sidebar')
 
-
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
@@ -57,12 +57,12 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                {{-- <form class="d-none d-md-flex ms-4" action="" method="POST">
+                <form class="d-none d-md-flex ms-4" action="" method="POST">
                     @csrf
                     <input class="form-control bg-dark border-0" type="search" name="Search"
                         placeholder="Search File">
                     <button class="btn btn-primary border-0 mx-2">Search</button>
-                </form> --}}
+                </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -76,7 +76,7 @@
             <!-- Navbar End -->
 
             @yield('content')
-            
+
         </div>
 
         <!-- Content End -->

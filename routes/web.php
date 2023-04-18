@@ -21,5 +21,5 @@ Route::get('/app', function () {
     return view('partials.app');
 });
 Route::get('/upload', [FileController::class, 'upload_file'])->name('upload');
-Route::get('/table', [FileController::class, 'table'])->name('table');
+Route::post('/table', [FileController::class, 'table'])->name('table');
 Route::post('/store', [FileController::class, 'store'])->name('store');
