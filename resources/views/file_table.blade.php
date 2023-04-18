@@ -4,13 +4,14 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">File Summary</h6>
-                {{-- <div class="px-0 w-25 my-2">
-                    <form class="mx-0 ms-8 d-flex" action="" method="GET">
-                        @csrf
-                        <input class="form-control bg-dark border-0" type="search" name="Search" placeholder="Search File">
-                        <button class="btn btn-primary border-0 mx-2">Search</button>
-                    </form>
-                </div> --}}
+                {{-- <div class="px-0 w-25 my-2"> --}}
+                    <form class="d-none d-md-flex ms-4" action="{{route('search')}}" method="POST">
+                    @csrf
+                    <input class="form-control bg-dark border-0" type="search" name="Search"
+                        placeholder="Search File">
+                    <button class="btn btn-primary border-0 mx-2">Search</button>
+                </form>
+                {{-- </div> --}}
                 <div class="table-responsive">
                     <table class="table text-center">
                         <thead>

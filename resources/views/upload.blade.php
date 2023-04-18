@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     {{-- FILE UPLOAD FORM --}}
-                    <form method="POST" action="{{ route('store') }}">
+                    <form method="POST" action="{{route('store')}}">
                         @csrf
                         {{-- PROGRAM TYPE --}}
                         <select class="form-select mb-3" aria-label="Default select example" name="FileFolder">
