@@ -24,6 +24,7 @@
                         </thead>
                         <tbody>
                             {{-- loop to display db content --}}
+                            @if(isset($files))
                             @foreach ($files as $file)
                                 <tr>
                                     <td>{{ $file->FileId }}</td>
@@ -33,6 +34,7 @@
                                     <td>{{ $file->FileDescription }}</td>
                                 </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
