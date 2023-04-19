@@ -5,9 +5,9 @@
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">File Summary</h6>
                 <div class="px-0 w-25 my-2">
-                <form class="d-none d-md-flex ms-4" action="{{ route('search') }}" method="POST">
+                <form class="d-none d-md-flex ms-4"  method="POST">
                     @csrf
-                    <input class="form-control bg-dark border-0" type="search" name="Search" placeholder="Search File">
+                    <input class="form-control bg-dark border-0" type="search" name="Search" id="search" placeholder="Search File">
                     <button class="btn btn-primary border-0 mx-2">Search</button>
                 </form>
                 </div>
@@ -22,7 +22,7 @@
                                 <th scope="col">Description</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTable">
                             {{-- loop to display db content --}}
                             @if(isset($files))
                             @foreach ($files as $file)
