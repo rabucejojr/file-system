@@ -4,7 +4,7 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">File Summary</h6>
-                <div class="px-0 w-25 my-2">
+                <div class="px-0 w-50 my-2">
                     <form class="d-none d-md-flex ms-4" method="POST">
                         @csrf
                         <input class="form-control bg-dark border-0" type="search" name="Search" id="search"
@@ -51,13 +51,56 @@
     {{-- EDIT FILE MODAL --}}
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="background-color:#191C24 !important">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="bg-secondary rounded h-200 p-4">
+                        <h6 class="mb-4">File Upload Form</h6>
+                        @if (isset($Success))
+                            <div class="alert alert-success" role="alert">
+                                {{ $Success }}
+                            </div>
+                        @elseif(isset($Error))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $Error }}
+                            </div>
+                        @endif
+                        {{-- FILE UPLOAD FORM --}}
+                        <form method="POST" action="{{ route('store') }}">
+                            @csrf
+                            {{-- PROGRAM TYPE --}}
+                            <select class="form-select mb-3" aria-label="Default select example" name="FileFolder">
+                                aria-placeholder="Folder Location">
+                                <option value="SETUP">SETUP</option>
+                                <option value="GIA">GIA</option>
+                                <option value="OTHERS">OTHERS</option>
+                            </select>
+                            {{-- FILENAME --}}
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Filename"
+                                    name="Filename">
+                                <label for="floatingInput">Filename</label>
+                            </div>
+                            {{-- DESCRIPTION --}}
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Description"
+                                    name="FileDescription">
+                                <label for="floatingInput">Description</label>
+                            </div>
+                            {{-- LOCATION --}}
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Location"
+                                    name="FilePath">
+                                <label for="floatingInput">Location</label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary ">Upload</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -69,6 +112,15 @@
 @endsection
 @section('script')
     <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+        // table buttons
         function edit_info() {
             alert('clicked')
         };
