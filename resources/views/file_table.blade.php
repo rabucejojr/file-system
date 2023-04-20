@@ -35,8 +35,9 @@
                                         <td>{{ $file->FilePath }}</td>
                                         <td>{{ $file->FileDescription }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#editModal">Edit</button>
+                                            <button type="button"
+                                                onclick="edit_file('{{ $files->FileId }}','{{ $files->Filename }}','{{ $files->FileFolder }}','{{ $files->FilePath }}','{{ $files->FileDescription }}')"
+                                                class="btn btn-info">Edit</button>
                                             <button type="submit" class=" btn btn-primary">Delete</button>
                                         </td>
                                     </tr>
@@ -49,7 +50,7 @@
         </div>
     </div>
     {{-- EDIT FILE MODAL --}}
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="edit_file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:#191C24 !important">
                 <div class="modal-body">
@@ -113,8 +114,53 @@
             });
         });
         // table buttons
-        function edit_info() {
-            alert('clicked')
+        function edit_file(FileId, Filename, FileFolder, FilePath, FileDescription) {
+            $('#edit_file').modal('toggle');
+            $('.FileId').val(FileId);
+            $('.FileFolder').val(FileFolder);
+            $('.Filename').val(Filename);
+            $('.FileDescription').val(FileDescription);
+            $('.FilePath').val(FilePath);
         };
+
+        function save_edit_student() 
+        {
+            var FileId = $('.FileId').val();
+            var FileFolder = $('.FileFolder').val();
+            var Filename = $('.Filename').val();
+            var FileDescription = $('.FileDescription').val();
+            var FilePath = $('.FilePath').val();
+
+            var file_Data = new FormData()
+            file_Data.append('FileId', FileId)
+            file_Data.append('FileFolder', FileFolder)
+            file_Data.append('Filename', Filename)
+            file_Data.append('FileDescription', FileDescription)
+            file_Data.append('FilePath', FilePath)
+            $.ajax({
+                method: "POST",
+                url: "{{ route('store') }}",
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                data: file_Data,
+            }).done(function(msg) {
+                if (msg.result == true) {
+                    Swal.fire(
+                        'Update',
+                        msg.message,
+                        'success'
+                    )
+                } else {
+                    Swal.fire(
+                        'Update',
+                        msg.message,
+                        'error'
+                    )
+                }
+            });
+        }
     </script>
 @endsection
