@@ -35,9 +35,7 @@
                                         <td>{{ $file->FilePath }}</td>
                                         <td>{{ $file->FileDescription }}</td>
                                         <td>
-                                            <button type="button"
-                                                onclick="edit_file('{{ $files->Filename }}','{{ $files->FileFolder }}','{{ $files->FilePath }}','{{ $files->FileDescription }}')"
-                                                class="btn btn-info">Edit</button>
+                                            <button type="button" class="btn btn-info">Edit</button>
                                             <button type="submit" class=" btn btn-primary">Delete</button>
                                         </td>
                                     </tr>
@@ -77,19 +75,19 @@
                             </select>
                             {{-- FILENAME --}}
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Filename"
+                                <input type="text" class="form-control filename" id="floatingInput" placeholder="Filename"
                                     name="Filename">
                                 <label for="floatingInput">Filename</label>
                             </div>
                             {{-- DESCRIPTION --}}
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Description"
+                                <input type="text" class="form-control filedesc" id="floatingInput" placeholder="Description"
                                     name="FileDescription">
                                 <label for="floatingInput">Description</label>
                             </div>
                             {{-- LOCATION --}}
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Location"
+                                <input type="text" class="form-control fileloc" id="floatingInput" placeholder="Location"
                                     name="FilePath">
                                 <label for="floatingInput">Location</label>
                             </div>
@@ -114,6 +112,16 @@
             });
         });
         // table buttons
-        
+        function edit(){
+            // get inputs
+            var name = $('.filename').val();
+            var name = $('.filedesc').val();
+            var name = $('.fileloc').val();
+            $.ajax({
+                type:'POST',
+                url:'{{route('store')}}',
+                success: function(response){}
+            });
+        }
     </script>
 @endsection
