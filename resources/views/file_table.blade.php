@@ -35,7 +35,7 @@
                                         <td>{{ $file->FilePath }}</td>
                                         <td>{{ $file->FileDescription }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info">Edit</button>
+                                            <button type="button" onclick="edit('{{$file->Filename}}')" class="btn btn-info">Edit</button>
                                             <button type="submit" class=" btn btn-primary">Delete</button>
                                         </td>
                                     </tr>
@@ -112,16 +112,11 @@
             });
         });
         // table buttons
-        function edit(){
+        function edit(filename){
             // get inputs
-            var name = $('.filename').val();
-            var name = $('.filedesc').val();
-            var name = $('.fileloc').val();
-            $.ajax({
-                type:'POST',
-                url:'{{route('store')}}',
-                success: function(response){}
-            });
+            $('#edit_file').modal('toggle');
+            var filename = $('.filename').val();
+        
         }
     </script>
 @endsection
