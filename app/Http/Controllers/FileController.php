@@ -17,35 +17,61 @@ class FileController extends Controller
   // store/save function controller
   public function store(Request $r)
   {
-    // get filename. path, and folder from upload form
-    $file = $r->Filename;
-    $path = $r->FilePath;
-    $folder = $r->FileFolder;
-    $fileInfo = [
-      'Filename' => $file,
-      'FileFolder' => $folder,
-      'FilePath' => $path,
-      'FileDescription' => trim($r->FileDescription),
+    $message = [
+      'result' => false,
+      'message' => 'please contact admin'
     ];
-    if (empty($r->Filename)) {
-      return view('upload')->with('Error', 'File is required.');
-    }
-    if (empty($r->FileDescription)) {
-      return view('upload')->with('Error', 'Description is required.');
-    }
-
-    // filteron ang fields for empty data
-    $Filter = File::where('Filename', $r->Filename)
-      ->where('FileDescription', $r->FileDescription)->first();
-
-    if ($Filter) {
-      return view('upload')->with('Error', 'File already exist.');
-    } else {
-      $save = File::insert($fileInfo);
-      if ($save) {
-        return view('upload')->with('Success', 'Successfully save');
+    // update
+    if (isset($r->FileID)) {
+      //diri ang update/edit na code
+      $files =    [
+        'StudentID' => $r->StudentID,
+        'FirstName' => $r->FirstName,
+        'LastName' => $r->LastName,
+        'MiddleName' => $r->MiddleName,
+        'ExtensionName' => $r->ExtensionName,
+        'BirthDate' => $r->BirthDate,
+        'Gender' => $r->Gender,
+      ];
+      $update = File::where('FileID', $r->FileID)->update($files);
+      if ($update) {
+        $message['result'] = true;
+        $message['message'] = 'Successfully updated.';
       } else {
-        return view('upload')->with('Error', 'Invalid');
+        $message['message'] = 'Failed updating student.';
+      }
+      return json_encode($message);
+    } else {
+      // SAVE
+      $file = $r->Filename;
+      $path = $r->FilePath;
+      $folder = $r->FileFolder;
+      $fileInfo = [
+        'Filename' => $file,
+        'FileFolder' => $folder,
+        'FilePath' => $path,
+        'FileDescription' => trim($r->FileDescription),
+      ];
+      if (empty($r->Filename)) {
+        return view('upload')->with('Error', 'File is required.');
+      }
+      if (empty($r->FileDescription)) {
+        return view('upload')->with('Error', 'Description is required.');
+      }
+
+      // filteron ang fields for empty data
+      $Filter = File::where('Filename', $r->Filename)
+        ->where('FileDescription', $r->FileDescription)->first();
+
+      if ($Filter) {
+        return view('upload')->with('Error', 'File already exist.');
+      } else {
+        $save = File::insert($fileInfo);
+        if ($save) {
+          return view('upload')->with('Success', 'Successfully save');
+        } else {
+          return view('upload')->with('Error', 'Invalid');
+        }
       }
     }
   }
