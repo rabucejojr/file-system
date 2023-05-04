@@ -113,7 +113,7 @@
         });
         // table buttons
         function edit(FileFolder,Filename,FileDescription,FilePath){
-            // get inputs
+            // get inputs & display to modal fields
             $('#edit_file').modal('toggle');
             $('#filefolder').val(FileFolder);
             $('.filename').val(Filename);

@@ -24,16 +24,18 @@ class FileController extends Controller
     // update
     if (isset($r->FileID)) {
       //diri ang update/edit na code
+      $id = $r->FileId;
+      $file = $r->Filename;
+      $path = $r->FilePath;
+      $folder = $r->FileFolder;
       $files =    [
-        'StudentID' => $r->StudentID,
-        'FirstName' => $r->FirstName,
-        'LastName' => $r->LastName,
-        'MiddleName' => $r->MiddleName,
-        'ExtensionName' => $r->ExtensionName,
-        'BirthDate' => $r->BirthDate,
-        'Gender' => $r->Gender,
+        'FileId' => $id,
+        'FileFolder' => $folder,
+        'Filename' => $file,
+        'FilePath' => $path,
+        'FileDescription' =>  trim($r->FileDescription),
       ];
-      $update = File::where('FileID', $r->FileID)->update($files);
+      $update = File::where('FileId', $r->$id)->update($files);
       if ($update) {
         $message['result'] = true;
         $message['message'] = 'Successfully updated.';
