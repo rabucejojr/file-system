@@ -17,14 +17,15 @@ class FileController extends Controller
   // store/save function controller
   public function store(Request $r)
   {
+    $id = $r->FileId;
     $message = [
       'result' => false,
       'message' => 'please contact admin'
     ];
     // update
-    if (isset($r->FileID)) {
+    if (isset($r->$id)) {
       //diri ang update/edit na code
-      $id = $r->FileId;
+      
       $file = $r->Filename;
       $path = $r->FilePath;
       $folder = $r->FileFolder;
