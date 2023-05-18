@@ -41,7 +41,7 @@ class FileController extends Controller
         $message['result'] = true;
         $message['message'] = 'Successfully updated.';
       } else {
-        $message['message'] = 'Failed updating student.';
+        $message['message'] = 'Update failed.';
       }
       return json_encode($message);
     } else {
