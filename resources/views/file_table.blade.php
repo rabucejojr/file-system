@@ -141,7 +141,7 @@
             contentType:false,
             cache:false,
             async:false,
-            data: student_Data,
+            data: file_data,
         }).done(function( msg ) {
             if(msg.result ==true){
                 Swal.fire(
