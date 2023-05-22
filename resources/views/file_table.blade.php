@@ -88,7 +88,7 @@
                             {{-- LOCATION --}}
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control filepath" id="floatingInput" placeholder="Path"
-                                    name="FilePath" disabled readonly>
+                                    name="FilePath">
                                 <label for="floatingInput">Path</label>
                             </div>
                             <div class="text-center">
